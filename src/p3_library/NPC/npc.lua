@@ -158,6 +158,7 @@ NPCLibrary.createNPC = function(firstName, lastName, age, characterType, spawnPo
 
             ---@param self addon_libs_npc_npc
             spawn = function(self)
+                -- Spawn the character
                 local object_id, success = server.spawnCharacter(
                     self.properties.spawnPosition,
                     self.properties.characterType
@@ -167,7 +168,22 @@ NPCLibrary.createNPC = function(firstName, lastName, age, characterType, spawnPo
                     return
                 end
 
+                -- Set object ID
                 self.properties.object_id = object_id
+
+                -- Set tooltip
+                server.setCharacterTooltip(
+                    self.properties.object_id,
+                    table.concat({
+                        self.properties.firstName,
+                        self.properties.lastName,
+                        "-----------",
+                        "Age: "..self.properties.age,
+                        "-----------",
+                        "Talk to me with:",
+                        "\""..self.properties.dialog.properties.rootOption.properties.trigger.."\""
+                    })
+                )
             end,
 
             ---@param self addon_libs_npc_npc
