@@ -20,7 +20,7 @@
 -- // Variables
 -------------------------------
 local dialog = NPCLibrary.createDialogOption(
-    "Hello",
+    "Hello!",
 
     {
         "Heya! How are you?",
@@ -29,16 +29,18 @@ local dialog = NPCLibrary.createDialogOption(
 
     {
         NPCLibrary.createDialogOption(
-            "I'm good",
+            "I'm good.",
 
             {
                 "Don't care! Would you like a present?",
                 "Cool, I don't care. Would you like a present?"
             },
 
-            {
-                NPCLibrary.createDialogOption(
-                    "Yes",
+            AuroraFramework.libraries.miscellaneous.combineTables(
+                true,
+
+                NPCLibrary.createMultipleDialogOptionsWithSameTrigger(
+                    {"Yes", "Yeah", "Sure", "Okay"},
 
                     {
                         "Here you go!"
@@ -54,11 +56,11 @@ local dialog = NPCLibrary.createDialogOption(
                     end
                 ),
 
-                NPCLibrary.createDialogOption(
-                    "No",
+                NPCLibrary.createMultipleDialogOptionsWithSameTrigger(
+                    {"No", "Pass", "Nah"},
 
                     {
-                        "g"
+                        "Idiot"
                     },
 
                     nil,
@@ -70,7 +72,7 @@ local dialog = NPCLibrary.createDialogOption(
                         player:ban()
                     end
                 )
-            }
+            )
         )
     }
 )
