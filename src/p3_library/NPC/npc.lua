@@ -21,6 +21,24 @@
 -------------------------------
 -- Handle NPCs
 NPCLibrary.init = function()
+    -- Let players talk to NPCs
+    ---@param message af_services_chat_message
+    AuroraFramework.services.chatService.events.onMessageSent:connect(function(message)
+        -- Get player's position
+        local player = message.properties.author
+        local playerPosition = player:getPosition()
+
+        -- Get closest NPC
+        local closestNPC, distance = NPCLibrary.getClosestNPCToPosition(playerPosition)
+
+        if distance > NPCLibrary.settings.maxTalkingDistance then -- NPC is too far from the player
+            return
+        end
+
+        -- Talk to the NPC
+        closestNPC:talk(player, message.properties.content)
+    end)
+
     -- When a player leaves, cancel all active NPC dialogs with the player
     ---@param player af_services_player_player
     AuroraFramework.services.playerService.events.onLeave:connect(function(player)
@@ -238,6 +256,26 @@ end
 ---@return addon_libs_npc_npc
 NPCLibrary.getNPC = function(id)
     return NPCLibrary.spawnedNPCs[id]
+end
+
+-- Get the closest NPC to a position
+---@param position SWMatrix
+---@return addon_libs_npc_npc, number
+NPCLibrary.getClosestNPCToPosition = function(position)
+    local recentDist, recentNPC
+
+    for _, NPC in pairs(NPCLibrary.getAllNPCs()) do
+        -- Get the NPCs position and distance to provided position
+        local pos = NPC:getPosition()
+        local distance = matrix.distance(pos, position)
+
+        -- If the NPC is closest to the provided position than the previous NPC, set recentNPC to this NPC
+        if not recentDist or distance <= recentDist then
+            recentDist, recentNPC = distance, NPC
+        end
+    end
+
+    return recentNPC, recentDist
 end
 
 -- Get all NPCs
