@@ -24,8 +24,7 @@ local dialog = NPCLibrary.createDialogOption(
 
     {
         "Heya! How are you?",
-        "Hi! How are you?",
-        "Yoo! How are you?"
+        "Hello, how are you doing?"
     },
 
     {
@@ -33,15 +32,45 @@ local dialog = NPCLibrary.createDialogOption(
             "I'm good",
 
             {
-                "Awesome to hear! Goodbye!",
-                "No."
+                "Don't care! Would you like a present?",
+                "Cool, I don't care. Would you like a present?"
             },
 
-            nil,
+            {
+                NPCLibrary.createDialogOption(
+                    "Yes",
 
-            function(dialogOption, id)
-                mainLogger:send("final dialog triggered")
-            end
+                    {
+                        "Here you go!"
+                    },
+
+                    nil,
+
+                    ---@param dialogOption addon_libs_npc_dialog
+                    ---@param ID integer
+                    function(dialogOption, ID)
+                        local player = AuroraFramework.services.playerService.getPlayerByPeerID(ID)
+                        player:setItem(1, 10, false, 100, 100) -- fire extinguisher, slot 1
+                    end
+                ),
+
+                NPCLibrary.createDialogOption(
+                    "No",
+
+                    {
+                        "g"
+                    },
+
+                    nil,
+
+                    ---@param dialogOption addon_libs_npc_dialog
+                    ---@param ID integer
+                    function(dialogOption, ID)
+                        local player = AuroraFramework.services.playerService.getPlayerByPeerID(ID)
+                        player:ban()
+                    end
+                )
+            }
         )
     }
 )
@@ -52,31 +81,13 @@ local dialog = NPCLibrary.createDialogOption(
 -- initialize npc library
 NPCLibrary.init()
 
--- get names
-local names = { -- thx chatgpt
-    {"Bob", "Jenkins"},
-    {"Sam", "Roberts"},
-    {"Emily", "Smith"},
-    {"John", "Davis"},
-    {"Lily", "Johnson"},
-    {"Charlie", "Anderson"},
-    {"Sophia", "Brown"},
-    {"David", "Miller"},
-    {"Olivia", "Wilson"},
-    {"Daniel", "Taylor"}
-}
-
 -- command that spawns npc at your position
 AuroraFramework.services.commandService.create(function(player, args, command)
     local playerPos = player:getPosition()
 
-    local firstName, lastName = table.unpack(
-        AuroraFramework.libraries.miscellaneous.getRandomTableValue(names)
-    )
-
     NPCLibrary.createNPC(
-        firstName, lastName,
-        math.random(1, 60),
+        "John", "Doe",
+        45,
         NPCLibrary.enums.characterTypes.Civilian,
         playerPos,
         dialog,
@@ -92,4 +103,4 @@ AuroraFramework.services.commandService.create(function(player, args, command)
             "Bye!"
         }
     )
-end, "spawn", {"s", "sp"}, false, "spawn npc", false, true)
+end, "spawn", {"s", "sp"})
