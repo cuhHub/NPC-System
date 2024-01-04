@@ -200,7 +200,7 @@ NPCLibrary.createNPC = function(firstName, lastName, age, characterType, spawnPo
                         "-----------",
                         "Talk to me with:",
                         "\""..self.properties.dialog.properties.rootOption.properties.trigger.."\""
-                    })
+                    }, "\n")
                 )
 
                 -- Make sure this NPC can't be picked up
