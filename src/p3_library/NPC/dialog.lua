@@ -56,7 +56,7 @@ NPCLibrary.createDialog = function(rootOption)
 
                 for _, option in pairs(current.properties.furtherOptions) do
                     -- message doesn't match dialog option trigger
-                    if not option.properties.trigger:lower():find(message:lower()) then
+                    if not NPCLibrary.internal.isIdentical(option.properties.trigger, message) then
                         goto continue
                     end
 
