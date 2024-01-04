@@ -36,8 +36,13 @@ NPCLibrary.createDialog = function(rootOption)
                 local current = self:getCurrentOption(id)
 
                 if not current then
+                    -- set current dialog option
                     self:setCurrentOption(id, self.properties.rootOption)
                     current = self:getCurrentOption(id) -- update variable
+
+                    -- return dialog option
+                    current.events.triggered:fire(current, id)
+                    return current
                 end
 
                 -- check if the dialog option has further options, if not, reset
@@ -68,6 +73,11 @@ NPCLibrary.createDialog = function(rootOption)
 
                 -- update properties
                 self:setCurrentOption(id, match)
+
+                -- check if the match has any further options, if not, reset too
+                if #match.properties.furtherOptions <= 0 then
+                    self:cancel(id)
+                end
 
                 -- fire the event and return the dialog response
                 match.events.triggered:fire(match, id)
