@@ -1,0 +1,6 @@
+# ignore sw addon files
+script.lua
+playlist.xml
+
+# ignore vscode workspace settings
+.vscode
