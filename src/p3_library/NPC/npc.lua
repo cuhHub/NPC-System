@@ -184,6 +184,14 @@ NPCLibrary.createNPC = function(firstName, lastName, age, characterType, spawnPo
                         "\""..self.properties.dialog.properties.rootOption.properties.trigger.."\""
                     })
                 )
+
+                -- Make sure this NPC can't be picked up
+                server.setCharacterData(
+                    self.properties.object_id,
+                    100,
+                    false,
+                    false
+                )
             end,
 
             ---@param self addon_libs_npc_npc
