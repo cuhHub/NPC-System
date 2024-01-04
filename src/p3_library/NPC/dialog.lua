@@ -42,13 +42,13 @@ NPCLibrary.createDialog = function(rootOption)
 
                     -- return dialog option
                     current.events.triggered:fire(current, id)
-                    return current
+                    return current, false
                 end
 
                 -- check if the dialog option has further options, if not, reset
                 if #current.properties.furtherOptions <= 0 then
                     self:cancel(id)
-                    return nil
+                    return nil, true
                 end
 
                 -- find the closest match
@@ -68,7 +68,7 @@ NPCLibrary.createDialog = function(rootOption)
 
                 -- return nothing if we couldnt find a match
                 if not match then
-                    return nil
+                    return nil, false
                 end
 
                 -- update properties
@@ -81,7 +81,7 @@ NPCLibrary.createDialog = function(rootOption)
 
                 -- fire the event and return the dialog response
                 match.events.triggered:fire(match, id)
-                return match
+                return match, self:getCurrentOption(id) == nil
             end,
 
             ---@param self addon_libs_npc_dialog
@@ -148,4 +148,28 @@ NPCLibrary.createDialogOption = function(trigger, responses, furtherOptions, cal
 
     -- Return the dialog option
     return dialogOption
+end
+
+-- Create multiple dialog options with the same trigger
+---@param triggers table<integer, string>
+---@param responses table<integer, string>
+---@param furtherOptions table<integer, addon_libs_npc_dialogoption>|nil
+---@param callback fun(dialogOption: addon_libs_npc_dialogoption, id: integer)|nil
+---@return addon_libs_npc_dialogoption
+NPCLibrary.createMultipleDialogOptionsWithSameTrigger = function(triggers, responses, furtherOptions, callback)
+    local dialogOptions = {}
+
+    for _, trigger in pairs(triggers) do
+        table.insert(
+            dialogOptions,
+            NPCLibrary.createDialogOption(
+                trigger,
+                responses,
+                furtherOptions,
+                callback
+            )
+        )
+    end
+
+    return dialogOptions
 end
