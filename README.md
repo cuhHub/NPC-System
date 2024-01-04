@@ -12,6 +12,7 @@ Utilizes [my framework](https://github.com/Cuh4/AuroraFramework).
 ## 😔 Limitations
 - NPCs are not persistent. If you create a NPC, and then reload the addon, the NPC will have to be created again
 - To start a conversation with a NPC, you can only say one thing. After that, you can say multiple things to progress through the conversation depending on the NPC's dialog.
+- Dialogs cannot be natively linked to one another. Each dialog has their own route.
 
 ## ❓ Requirements
 - **Python 3.11+**
