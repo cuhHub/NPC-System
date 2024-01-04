@@ -55,7 +55,8 @@ _ = {
 
     ---@param self addon_libs_npc_npc
     ---@param player af_services_player_player
-    cancel = function(self, player) end,
+    ---@param silentGoodbye boolean|nil
+    cancel = function(self, player, silentGoodbye) end,
 
     ---@param self addon_libs_npc_npc
     ---@return SWMatrix
@@ -89,7 +90,7 @@ _ = {
     ---@param self addon_libs_npc_dialog
     ---@param id integer
     ---@param message string
-    ---@return addon_libs_npc_dialogoption
+    ---@return addon_libs_npc_dialogoption, boolean
     talk = function(self, id, message) end,
 
     ---@param self addon_libs_npc_dialog

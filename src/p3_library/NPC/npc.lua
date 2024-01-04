@@ -107,7 +107,7 @@ NPCLibrary.createNPC = function(firstName, lastName, age, characterType, spawnPo
             talk = function(self, player, message) 
                 -- Get the current dialog option for this player
                 local id = player.properties.peer_id
-                local currentOption = self.properties.dialog:talk(id, message)
+                local currentOption, isConversationComplete = self.properties.dialog:talk(id, message)
 
                 -- Update property
                 self.properties.talkingTo[id] = true
@@ -136,11 +136,17 @@ NPCLibrary.createNPC = function(firstName, lastName, age, characterType, spawnPo
                     currentOption:getResponse().."\n"..table.concat(nextTriggers, " - "),
                     player
                 )
+
+                -- If the conversation has ended, cancel the interaction
+                if isConversationComplete then
+                    self:cancel(player, true)
+                end
             end,
 
             ---@param self addon_libs_npc_npc
             ---@param player af_services_player_player
-            cancel = function(self, player)
+            ---@param silentGoodbye boolean|nil
+            cancel = function(self, player, silentGoodbye)
                 -- Check if the player is even being talked to
                 if not self:isTalking(player) then
                     return
@@ -156,6 +162,10 @@ NPCLibrary.createNPC = function(firstName, lastName, age, characterType, spawnPo
                 self.properties.talkingTo[id] = nil
 
                 -- Send a goodbye message
+                if silentGoodbye then
+                    return
+                end
+
                 AuroraFramework.services.chatService.sendMessage(
                     self:name(),
                     AuroraFramework.libraries.miscellaneous.getRandomTableValue(self.properties.goodbyeResponses),
