@@ -78,6 +78,9 @@ local dialog = NPCLibrary.createDialogOption(
 -------------------------------
 -- // Main
 -------------------------------
+-- clear chat
+AuroraFramework.services.chatService.clear()
+
 -- initialize npc library
 NPCLibrary.init()
 
