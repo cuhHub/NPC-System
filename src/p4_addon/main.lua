@@ -67,7 +67,7 @@ local names = { -- thx chatgpt
 }
 
 -- command that spawns npc at your position
-AuroraFramework.services.commandService.create(function(command, args, player)
+AuroraFramework.services.commandService.create(function(player, args, command)
     local playerPos = player:getPosition()
 
     local firstName, lastName = table.unpack(
