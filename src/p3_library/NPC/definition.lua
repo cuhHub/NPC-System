@@ -21,6 +21,7 @@
 -------------------------------
 NPCLibrary = {
     enums = {},
+    internal = {},
     spawnedNPCs = {}, ---@type table<integer, addon_libs_npc_npc>
     id = 0,
 
