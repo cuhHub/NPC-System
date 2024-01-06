@@ -21,14 +21,14 @@
 -------------------------------
 local dialog = NPCLibrary.createDialog(
     NPCLibrary.createDialogOption(
-        "Hello!",
+        "Hello!", -- trigger (string that activates this dialog option)
 
-        {
+        { -- responses
             "Heya! How are you?",
             "Hello, how are you doing?"
         },
 
-        {
+        { -- further dialog options
             NPCLibrary.createDialogOption(
                 "I'm good.",
 
