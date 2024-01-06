@@ -19,62 +19,64 @@
 -------------------------------
 -- // Variables
 -------------------------------
-local dialog = NPCLibrary.createDialogOption(
-    "Hello!",
+local dialog = NPCLibrary.createDialog(
+    NPCLibrary.createDialogOption(
+        "Hello!",
 
-    {
-        "Heya! How are you?",
-        "Hello, how are you doing?"
-    },
+        {
+            "Heya! How are you?",
+            "Hello, how are you doing?"
+        },
 
-    {
-        NPCLibrary.createDialogOption(
-            "I'm good.",
+        {
+            NPCLibrary.createDialogOption(
+                "I'm good.",
 
-            {
-                "Don't care! Would you like a present?",
-                "Cool, I don't care. Would you like a present?"
-            },
+                {
+                    "Don't care! Would you like a present?",
+                    "Cool, I don't care. Would you like a present?"
+                },
 
-            AuroraFramework.libraries.miscellaneous.combineTables(
-                true,
+                AuroraFramework.libraries.miscellaneous.combineTables(
+                    true,
 
-                NPCLibrary.createMultipleDialogOptionsWithSameTrigger(
-                    {"Yes", "Yeah", "Sure", "Okay"},
+                    NPCLibrary.createMultipleDialogOptionsWithSameTrigger(
+                        {"Yes", "Yeah", "Sure", "Okay"},
 
-                    {
-                        "Here you go!"
-                    },
+                        {
+                            "Here you go!"
+                        },
 
-                    nil,
+                        nil,
 
-                    ---@param dialogOption addon_libs_npc_dialog
-                    ---@param ID integer
-                    function(dialogOption, ID)
-                        local player = AuroraFramework.services.playerService.getPlayerByPeerID(ID)
-                        player:setItem(1, 10, false, 100, 100) -- fire extinguisher, slot 1
-                    end
-                ),
+                        ---@param dialogOption addon_libs_npc_dialog
+                        ---@param ID integer
+                        function(dialogOption, ID)
+                            local player = AuroraFramework.services.playerService.getPlayerByPeerID(ID)
+                            player:setItem(1, 10, false, 100, 100) -- fire extinguisher, slot 1
+                        end
+                    ),
 
-                NPCLibrary.createMultipleDialogOptionsWithSameTrigger(
-                    {"No", "Pass", "Nah"},
+                    NPCLibrary.createMultipleDialogOptionsWithSameTrigger(
+                        {"No", "Pass", "Nah"},
 
-                    {
-                        "Idiot"
-                    },
+                        {
+                            "Idiot"
+                        },
 
-                    nil,
+                        nil,
 
-                    ---@param dialogOption addon_libs_npc_dialog
-                    ---@param ID integer
-                    function(dialogOption, ID)
-                        local player = AuroraFramework.services.playerService.getPlayerByPeerID(ID)
-                        player:ban()
-                    end
+                        ---@param dialogOption addon_libs_npc_dialog
+                        ---@param ID integer
+                        function(dialogOption, ID)
+                            local player = AuroraFramework.services.playerService.getPlayerByPeerID(ID)
+                            player:ban()
+                        end
+                    )
                 )
             )
-        )
-    }
+        }
+    )
 )
 
 -------------------------------

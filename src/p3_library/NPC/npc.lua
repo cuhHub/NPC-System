@@ -82,7 +82,7 @@ end
 ---@param age integer
 ---@param characterType SWOutfitTypeEnum
 ---@param spawnPosition SWMatrix
----@param dialog addon_libs_npc_dialogoption
+---@param dialog addon_libs_npc_dialog
 ---@param confusionResponses table<integer, string>
 ---@param goodbyeResponses table<integer, string>
 ---@return addon_libs_npc_npc
@@ -241,7 +241,7 @@ NPCLibrary.createNPC = function(firstName, lastName, age, characterType, spawnPo
             spawnPosition = spawnPosition,
             object_id = 0,
             characterType = characterType,
-            dialog = NPCLibrary.createDialog(dialog),
+            dialog = dialog,
             id = NPCLibrary.id,
             confusionResponses = confusionResponses,
             goodbyeResponses = goodbyeResponses,
