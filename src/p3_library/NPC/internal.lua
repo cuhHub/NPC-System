@@ -10,7 +10,7 @@
 
     CREDIT:
         Author: @cuh6_ (Discord)
-        GitHub Repository: https://github.com/Cuh4/NPCDialogDemo
+        GitHub Repository: https://github.com/cuhHub/NPCDialogDemo
         Created: 04/01/2024
 
     ----------------------------

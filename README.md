@@ -19,7 +19,7 @@ Utilizes [my framework](https://github.com/Cuh4/AuroraFramework).
 - **Stormworks: Build and Rescue** (game)
 
 ## 💻 Setup
-1) Run `git clone "https://github.com/Cuh4/NPCDialogDemo.git" "%appdata%/Stormworks/data/missions/NPCDialogDemo"`
+1) Run `git clone "https://github.com/cuhHub/NPCDialogDemo.git" "%appdata%/Stormworks/data/missions/NPCDialogDemo"`
 2) Create a `playlist.xml` file containing the content below.
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
