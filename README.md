@@ -2,12 +2,12 @@
 
 ---
 
-# NPC Dialog Demo
+# NPC System
 
 ## 📚 Overview
-This repo contains a library that allows you to create NPCs that you can talk to. Built for Stormworks: Build and Rescue.
+This repo contains a library that allows you to create NPCs that you can interact with. Built for Stormworks: Build and Rescue.
 
-Utilizes [my framework](https://github.com/Cuh4/AuroraFramework).
+Utilizes [Cuh4's framework](https://github.com/Cuh4/AuroraFramework).
 
 ## 😔 Limitations
 - NPCs are not persistent. If you create a NPC, and then reload the addon, the NPC will have to be created again
@@ -19,7 +19,7 @@ Utilizes [my framework](https://github.com/Cuh4/AuroraFramework).
 - **Stormworks: Build and Rescue** (game)
 
 ## 💻 Setup
-1) Run `git clone "https://github.com/cuhHub/NPCDialogDemo.git" "%appdata%/Stormworks/data/missions/NPCDialogDemo"`
+1) Run `git clone "https://github.com/cuhHub/NPC-System.git"
 2) Create a `playlist.xml` file containing the content below.
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -30,7 +30,8 @@ Utilizes [my framework](https://github.com/Cuh4/AuroraFramework).
 </playlist>
 ```
 3) Run `py combiner.py` (or run `combiner.bat`) to create a `script.lua` file. Feel free to close it once it has been created.
-4) Create a save with the addon enabled, and test away.
+4) Run `sync.bat` to automatically replicate the addon into your Stormworks' addons folder.
+5) Create a save with the addon enabled, and test away.
 
 ## ✨ Credit
 - [**Cuh4**](https://discord.com/users/1141077132915777616) ([GitHub](https://github.com/Cuh4))
